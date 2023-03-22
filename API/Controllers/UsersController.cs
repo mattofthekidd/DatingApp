@@ -18,6 +18,15 @@ namespace API.Controllers
 
         }
 
+        //[HttpGet] //Attribute telling the compiler what the method does
+        //public async Task<AppUser> GetTest() { //the method is async which returns a Task
+        //  return await _context.Users.linqAsync(); 
+        // //we use EF Core to make our query async
+        // //we must await on the db context while the query runs
+        // //this is an Endpoint in the API controller
+        //}
+
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers() {
             var users = await _context.Users.ToListAsync();
