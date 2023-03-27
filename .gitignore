@@ -4,3 +4,4 @@ API/obj/*
 API/datingapp.db
 API/datingapp.db-wal
 API/datingapp.db-shm
+StudentAssets/*
