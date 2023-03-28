@@ -1,3 +1,7 @@
+This project is following a Udemy course.
+I'd estimate that about 90%-95% of it will be exactly as found in the course.
+
+
 common commands used
 for personal reference
 
@@ -6,6 +10,8 @@ dotnet watch run
 Entity Framework
     Create migration
         dotnet ef migrations add <migration name>
+    Remove migration
+        dotnet ef migrations remove
     Update db
         dotnet ef database update 
 

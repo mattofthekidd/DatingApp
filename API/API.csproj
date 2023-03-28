@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <Nullable>disable</Nullable>
+    <!-- this allows strings to be null when disabled -->
+    <Nullable>disable</Nullable> 
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 

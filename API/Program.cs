@@ -12,6 +12,7 @@ builder.Services.AddDbContext<DataContext>(options => {
 });
 
 builder.Services.AddCors();
+builder.Services.AddTransient
 
 //end of services container
 

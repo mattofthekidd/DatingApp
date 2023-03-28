@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers { 
@@ -7,3 +8,10 @@ namespace API.Controllers {
         
     }
 }
+
+/*
+    the [ApiController] attribute gives us several features
+        -automatic data binding for our api requests
+        -[FromBody] is not neccessary
+        -automatic checking of validation before running the api method
+*/
