@@ -31,7 +31,7 @@ Extensions
 
 Nuget Packages
     System.IdentityModel.Tokens.Jwt by Microsoft
+    Microsoft.AspNetCore.Authentication.JwtBearer by Microsoft
 
-    
 Program starts from Program.cs where the builder is.
 This also contains the services container.

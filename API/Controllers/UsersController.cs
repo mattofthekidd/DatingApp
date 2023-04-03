@@ -1,9 +1,11 @@
 using API.Data;
 using API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers {
+    [Authorize] //must pass a token to the endpoint to access
     public class UsersController : BaseApiController {
         private readonly DataContext _context;
         public UsersController(DataContext context)
@@ -21,7 +23,7 @@ namespace API.Controllers {
         // //this is an Endpoint in the API controller
         //}
 
-
+        [AllowAnonymous] //bypasses any authentication
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers() {
             var users = await _context.Users.ToListAsync();
