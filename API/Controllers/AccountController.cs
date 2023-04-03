@@ -3,6 +3,8 @@ using System.Text;
 using API.Data;
 using API.DTOS;
 using API.Entities;
+using API.Interfaces;
+using API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,12 +12,14 @@ namespace API.Controllers
 {
     public class AccountController : BaseApiController {
         private readonly DataContext _context;
-        public AccountController(DataContext context) {
+        private readonly ITokenService _tokenService;
+        public AccountController(DataContext context, ITokenService tokenService) {
             _context = context;
+            _tokenService = tokenService;
         }
 
         [HttpPost("register")] //POST: api/accounts/register
-        public async Task<ActionResult<AppUser>> Register(RegisterDto registerDto) {
+        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto) {
             if(await IsUserUnique(registerDto.Username)) return BadRequest("Username must be unique.");
         
             // This is rendered pointless because of the [Required] tag on the RegisterDto model.
@@ -31,11 +35,11 @@ namespace API.Controllers
             );
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-            return user;
+            return new UserDto(user.UserName, _tokenService.CreateToken(user));
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<AppUser>> Login(LoginDto loginDto) {
+        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto) {
 
             var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName.ToLower() == loginDto.Username.ToLower());
             if(user == null) return Unauthorized("invalid username");
@@ -47,7 +51,8 @@ namespace API.Controllers
             for (var i = 0; i < computedHash.Length; i++) {
                 if(computedHash[i] != user.PasswordHash[i]) return Unauthorized("invalid password");
             }
-            return user;
+
+            return new UserDto(user.UserName, _tokenService.CreateToken(user));
         }
 
         private async Task<bool> IsUserUnique(string username) {

@@ -29,5 +29,9 @@ Extensions
     kreativ-software.csharpextensions
     Angular.ng-template
 
+Nuget Packages
+    System.IdentityModel.Tokens.Jwt by Microsoft
+
+    
 Program starts from Program.cs where the builder is.
 This also contains the services container.

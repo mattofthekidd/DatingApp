@@ -1,4 +1,6 @@
 using API.Data;
+using API.Interfaces;
+using API.Services;
 using Microsoft.EntityFrameworkCore;
 //main entry point into our application
 
@@ -12,7 +14,10 @@ builder.Services.AddDbContext<DataContext>(options => {
 });
 
 builder.Services.AddCors();
-builder.Services.AddTransient
+//section 4.41 udemy
+builder.Services.AddScoped<ITokenService, TokenService>(); //usually what you want, can cache data
+    // builder.Services.AddTransient() very short lived
+    // builder.Services.AddSingleton() is run at startup and persists until the app is closed
 
 //end of services container
 
