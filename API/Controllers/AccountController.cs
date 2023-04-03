@@ -25,23 +25,24 @@ namespace API.Controllers
             // This is rendered pointless because of the [Required] tag on the RegisterDto model.
             // if(IsNewUserEmpty(registerDto.Username, registerDto.Password)) return BadRequest("Username and password cannot be null.");
 
-
             using var hmac = new HMACSHA512(); //"using" will garbage collect this automatically
 
-            var user = new AppUser(
-                registerDto.Username,
-                hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-                hmac.Key
-            );
+            var user = new AppUser {
+                Username = registerDto.Username.ToLower(),
+                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
+                PasswordSalt = hmac.Key
+            };
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-            return new UserDto(user.UserName, _tokenService.CreateToken(user));
+            return new UserDto {
+                Username = user.Username,
+                Token = _tokenService.CreateToken(user)
+            };
         }
 
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto) {
-
-            var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName.ToLower() == loginDto.Username.ToLower());
+            var user = await _context.Users.SingleOrDefaultAsync(x => x.Username.ToLower() == loginDto.Username.ToLower());
             if(user == null) return Unauthorized("invalid username");
 
             using var hmac = new HMACSHA512(user.PasswordSalt);
@@ -52,16 +53,15 @@ namespace API.Controllers
                 if(computedHash[i] != user.PasswordHash[i]) return Unauthorized("invalid password");
             }
 
-            return new UserDto(user.UserName, _tokenService.CreateToken(user));
+            return new UserDto {
+                Username = user.Username,
+                Token = _tokenService.CreateToken(user)
+            };
         }
 
         private async Task<bool> IsUserUnique(string username) {
-            return await _context.Users.AnyAsync(x => x.UserName.ToLower() == username.ToLower());
+            return await _context.Users.AnyAsync(x => x.Username.ToLower() == username.ToLower());
         }
-
-        // private bool IsNewUserEmpty(string username, string password) {
-        //     return String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password);
-        // }
         
     }
 }

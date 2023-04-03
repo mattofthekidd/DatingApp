@@ -8,8 +8,7 @@ namespace API.Controllers {
     [Authorize] //must pass a token to the endpoint to access
     public class UsersController : BaseApiController {
         private readonly DataContext _context;
-        public UsersController(DataContext context)
-        {
+        public UsersController(DataContext context) {
             //This is dependancy injection boy-o
             _context = context;
 
