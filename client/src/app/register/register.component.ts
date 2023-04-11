@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-register',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  @Input() usersFromHomeComponent: any; //this grabs an input from our parent component via html
+  @Output() cancelRegister = new EventEmitter(); //sends data to the parent
   model: any = {};
   constructor() { }
 
@@ -16,7 +18,7 @@ export class RegisterComponent implements OnInit {
     console.log(this.model);
   }
   public cancel(): void {
-    console.log("cancelled");
+    this.cancelRegister.emit(false);
   }
 
 }

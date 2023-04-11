@@ -24,6 +24,7 @@ export class NavComponent implements OnInit {
 
 
   public login(): void {
+    this.model.username = this.model.username.trim(); //did this so I can be sloppy
     //we don't need to worry about unsubscribing from this
     //because it is an http request and they resolve
     //when they resolve they are automatically unsubed

@@ -10,22 +10,14 @@ import { User } from './_models/user';
 })
 export class AppComponent implements OnInit {
   title = 'Dating App';
-  users: any;
 
-  constructor(private http: HttpClient, private accountService: AccountService) {}
-  //removed async and await because he isn't using it yet and I assume he will later.
+  constructor(private accountService: AccountService) {}
+
   ngOnInit(): void {
-    this.getUsers();
+    
     this.setCurrentUser();
   }
 
-  private getUsers() {
-    this.http.get('https://localhost:5001/api/users').subscribe({
-      next: x => this.users = x,
-      error: error => console.log(error),
-      complete: () => console.log('Request completed'),
-    });
-  }
 
   private setCurrentUser() {
     //the ! turns off Typescript safety (overriding strict mode).
