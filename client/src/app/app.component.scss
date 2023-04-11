@@ -1,0 +1,21 @@
+#app-container {
+    // display: grid;
+    
+    #top-nav {
+        display: block;
+        // display: grid;
+        height: 56px;
+    }
+
+    .main {
+        // margin-top: 4em;
+        // height: 100%;
+        // display: grid;
+        
+        
+        .list-container {
+            border: solid black 1px;
+        }
+        
+    }
+}

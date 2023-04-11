@@ -1,16 +1,9 @@
-<h1>{{title}}</h1>
+<span id="app-container">
 
-<ul>
-    <li *ngFor="let u of users">
-        {{u.id}} - {{u.userName}}
-    </li>
-</ul>
-
-<div class="form-group">
-    <label for="username">Username</label>
-    <input type="text" type="username" aria-describedby="username">
-    <label for="password">Password</label>
-    <input type="text" type="password" aria-describedby="password">
-    <label for="confirmPassword">Confirm password</label>
-    <input type="text" type="password" aria-describedby="confirmPassword">
-</div>
+    <app-nav id="top-nav"></app-nav>
+    
+    <div class="container main">
+        <app-home></app-home>
+    </div>
+    
+</span>

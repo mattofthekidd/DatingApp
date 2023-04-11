@@ -35,3 +35,6 @@ Nuget Packages
 
 Program starts from Program.cs where the builder is.
 This also contains the services container.
+
+This course does not focus on responsive web design so it will not be included.
+I may decide to do that at the end. 

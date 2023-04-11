@@ -25,7 +25,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200")); //sets a CORS policy for our frontend endpoint requests
 
-//this must happen here in this order, section 4.44
+//this must happen here and in this order, section 4.44
 app.UseAuthentication(); //is the token valid?
 app.UseAuthorization(); //if token is valid, what does the token allow you to do?
 
