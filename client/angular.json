@@ -30,7 +30,9 @@
             "styles": [
               "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.scss",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/bootswatch/dist/vapor/bootstrap.css",
               "./node_modules/font-awesome/scss/font-awesome.scss",
+              "./node_modules/ngx-toastr/toastr.css",
               "src/styles.scss"
             ],
             "scripts": []

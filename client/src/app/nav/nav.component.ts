@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AccountService } from '../_services/account.service';
 import { Observable, Subscription, of } from 'rxjs';
 import { User } from '../_models/user';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nav',
@@ -10,14 +12,14 @@ import { User } from '../_models/user';
 })
 export class NavComponent implements OnInit, OnDestroy {
 
-
-  public model: any = {};
   // of() tells the compiler that this is an 
   // Observable of type null
   // currentUser$: Observable<User | null> = of(null)
+
+  public model: any = {username: '', password: ''};
   public username: string = "";
   private subs: Subscription[] = [];
-  constructor(public accountService: AccountService) { }
+  constructor(public accountService: AccountService, private router: Router, private toastr: ToastrService) { }
 
   ngOnDestroy():void  {
     this.subs.forEach(s => s.unsubscribe());
@@ -36,23 +38,23 @@ export class NavComponent implements OnInit, OnDestroy {
 
 
   public login(): void {
-    this.model.username = this.model.username.trim(); //did this so I can be sloppy
+      // this.model.username = this.model.username.trim(); //did this so I can be sloppy
     //we don't need to worry about unsubscribing from this
     //because it is an http request and they resolve
     //when they resolve they are automatically unsubed
       this.accountService.login(this.model).subscribe({
-        next: res => {
-          console.log("success: ", res);
-
-        },
-        error: err => {
-          console.log("error: ", err)
+        next: () => this.router.navigateByUrl('/members'),
+        error: e => {
+          this.toastr.error(e.error)
+          console.log("error: ", e)
         }
       });
+      this.model = {username: '', password: ''};
     
   }
   public logout(): void {
     this.accountService.logout();
+    this.router.navigateByUrl('/');
   }
 
 }
