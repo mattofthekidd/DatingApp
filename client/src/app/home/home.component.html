@@ -15,8 +15,10 @@
             <div class="row justify-content-center">
                 <div class="col-4">
                     <!-- the stuff in the square brackets is sending an input to our app-register component -->
+                    <!-- adding this [usersFromHomeComponent]="users" to app-register does the thing above-->
+
                     <!-- the stuff in the parens will grab @Output from the app-register component -->
-                    <app-register [usersFromHomeComponent]="users" (cancelRegister)="cancelRegisterMode($event)"></app-register>
+                    <app-register  (cancelRegister)="cancelRegisterMode($event)"></app-register>
                 </div>
             </div>
         </div>
