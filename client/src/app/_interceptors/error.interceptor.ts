@@ -44,7 +44,9 @@ export class ErrorInterceptor implements HttpInterceptor {
               this.router.navigateByUrl('/not-found');
               break;
             case 500:
+              //get the error and store it in the router state
               const navExtras: NavigationExtras = {state: {error: error}};
+              //when we navigate to the server error we'll get access to the error inside the navExtras
               this.router.navigateByUrl('/server-error', navExtras);
               break;
             default:

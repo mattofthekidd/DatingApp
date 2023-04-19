@@ -1,1 +1,20 @@
-<p>server-error works!</p>
+<!--
+    Note, this is not how we would normally handle things.
+    For the sake of learning we'll be doing it anyway.
+    If we went to production we'd remove everything but the 'Internal server error'
+ -->
+<h4>Internal server error - refreshing the page will make the error disappear</h4>
+<ng-container *ngIf="!!error"> <!--I know the !! is not necessary but I like that it makes it clear that we are checking if it exists-->
+    <h5 class="text-danger">Error: {{error.message}}</h5>
+    <p class="font-weight-bold">Note: If you are seeing this then Angular is probably not to blame.</p>
+    <p>What to do next?</p>
+    <ol>
+        <li>Open browser dev tools! Then check the failing request in the network tab.</li>
+        <li>Examine request URL - what API endpoint are you requesting?</li>
+        <li>Reproduce the problem in Postman - if we get the same error then Angular is 100% not the problem.</li>
+    </ol>
+    <p class="font-weight-bold">Stack trace below
+        - the first few lines will tell you which line of code caused the issue in the API.
+    </p>
+    <code class="mt-5 error-details">{{error.details}}</code>
+</ng-container>
