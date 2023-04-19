@@ -6,6 +6,7 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { TestErrorComponent } from './errors/test-error/test-error.component';
 
 //goes through this in order
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
     ]
     //This protects all these routes with the AuthGuard without having to add it to every single one individually
   },
+  {path: 'errors', component: TestErrorComponent},
   {path: '**', component: HomeComponent, pathMatch: 'full'},
 ];
 
