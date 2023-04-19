@@ -43,11 +43,7 @@ export class NavComponent implements OnInit, OnDestroy {
     //because it is an http request and they resolve
     //when they resolve they are automatically unsubed
       this.accountService.login(this.model).subscribe({
-        next: () => this.router.navigateByUrl('/members'),
-        error: e => {
-          this.toastr.error(e.error)
-          console.log("error: ", e)
-        }
+        next: () => this.router.navigateByUrl('/members')
       });
       this.model = {username: '', password: ''};
     
