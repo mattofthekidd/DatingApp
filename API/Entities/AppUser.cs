@@ -24,8 +24,12 @@ namespace API.Entities
         //In EF terms, this is called a "navigation property" because we access it via Users.Photo
         public List<Photo> Photos { get; set; } = new(); //new() == new List<Photo>()
 
-        public int GetAge() {
-            return DateOfBirth.CalculateAge(); //uses DateTimeExtensions
-        }
+// because of this Auto Mapper has to get the full entity
+//even though we created MemberDto with the intention of pulling less data
+        // public int GetAge() {
+        //     return DateOfBirth.CalculateAge(); //uses DateTimeExtensions
+        // }
+
+        
     }
 }

@@ -17,6 +17,9 @@ namespace API.Extensions {
             services.AddScoped<ITokenService, TokenService>(); //usually what you want
             // services.AddTransient() very short lived
             // services.AddSingleton() is run at startup and persists until the app is closed. used when you want to cache data to improve load times
+
+            services.AddScoped<IUserRepository, UserRepository>(); //means this is scoped to the level of the Http Request
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); //sec 8.94, ~5 min
             return services;
         }
     }
