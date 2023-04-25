@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { User } from '../_models/user';
+import { environment } from 'src/environments/environment';
 
 //decorator Injectable means it can be injected into our components or other services
 @Injectable({
@@ -10,7 +11,7 @@ import { User } from '../_models/user';
   providedIn: 'root' 
 })
 export class AccountService {
-  private baseUrl = 'https://localhost:5001/api/';
+  private baseUrl = environment.apiUrl;
   private currentUserSource = new BehaviorSubject<User | null>(null); //can be a user or null, called a union type
 
   public currentUser$ = this.currentUserSource.asObservable();
