@@ -1,16 +1,10 @@
 .app-container {
-    // display: grid;
     display: flex;
     flex-direction: column;
     flex: auto;
     
     .top-nav {
-        display: flex;
-        // flex: 1;
-        // height: 4em;
         flex-direction: row;
-        // display: grid;
-        // height: 56px;
     }
 
     @media (max-width: 765px) {
@@ -20,13 +14,7 @@
     }
 
     .main {
-        display: flex;
-        // margin-top: 4em;
         padding-top: 65px;
-        // flex: 11;
-        // height: 100%;
-        // display: grid;
-        
         
         .list-container {
             border: solid black 1px;
